@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { BodyText, LargueText } from "../text";
 import { TwitterLogo, InstagramLogo } from "../icons";
-import { AlingCenterDiv } from "../divStyled";
+import { FlexRowDivAlingCenter } from "../divStyled";
+
+const LogoConteiner = styled(FlexRowDivAlingCenter)`
+  gap: 7px;
+`;
+
 export const BodyTextWhite = styled(BodyText)`
   color: var(--main-color);
   align-items: center;
@@ -32,14 +37,14 @@ export function SectionFooterRedes() {
   return (
     <MySectionPefilFooter>
       <LargueTextWhite>Redes</LargueTextWhite>
-      <AlingCenterDiv>
+      <LogoConteiner>
         <TwitterLogo />
         <BodyTextWhite>My E-Commerce</BodyTextWhite>
-      </AlingCenterDiv>
-      <AlingCenterDiv>
+      </LogoConteiner>
+      <LogoConteiner>
         <InstagramLogo />
         <BodyTextWhite>My E-Commerce</BodyTextWhite>
-      </AlingCenterDiv>
+      </LogoConteiner>
     </MySectionPefilFooter>
   );
 }

@@ -1,7 +1,12 @@
 import styled from "styled-components";
+export const InvisibleButton = styled.button`
+  background-color: transparent;
+  border: none;
+`;
+
 export const PrincipalButton = styled.button`
   height: 37px;
-  width: 163px;
+  width: 100%;
   border: none;
   border-radius: 8px;
   font-size: 16px;

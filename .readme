@@ -1,0 +1,4 @@
+Componets Ui: 
+Su responsabilidad solo ocupa expresar minimos fragmentos visuales de la ui.
+Tienen prohibido utilizar hooks, customhooks o conexiones a la api.
+Son componentenes pequeños con un maximo de 50 lineas de código.
