@@ -17,15 +17,20 @@ import {
 import { InputText } from "@/ui/input";
 import { Card } from "@/ui/card";
 import { Footer } from "@/ui/footer";
+import { HeaderNav } from "@/ui/header";
+
 export default function Home() {
   return (
     <div>
-      <Logo></Logo>
+      <HeaderNav />
+      <div style={{ margin: "15px 0" }}>
+        <Logo></Logo>
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <Title>Title</Title>
         <Subtitle>Subtitle</Subtitle>
         <LargueText>HI EVERYBODY , HOW ARE YOU BOYS?</LargueText>
-        <LargueTextBold>I AM THE BOY </LargueTextBold>
+        <LargueTextBold>I AM THE BOSS </LargueTextBold>
         <BodyText>
           Body: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus imperdiet eros suscipit pulvinar euismod. Suspendisse
@@ -48,7 +53,9 @@ export default function Home() {
         <FucsiaButton>Texto del botón</FucsiaButton>
       </div>
       <InputText placeholder="Placeholder"></InputText>
-      <Card></Card>
+      <div style={{ margin: "10px 0" }}>
+        <Card></Card>
+      </div>
       <Footer></Footer>
     </div>
   );

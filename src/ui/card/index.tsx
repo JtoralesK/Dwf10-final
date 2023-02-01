@@ -14,7 +14,7 @@ export function Card() {
   return (
     <BoxCard>
       <img
-        style={{ height: "237px", width: "315px" }}
+        style={{ height: "237px" }}
         src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/reloj-hombre-omega-seamaster-300-1621435252.jpg"
         alt="reloj hombre"
       />
