@@ -1,11 +1,20 @@
 import styled from "styled-components";
+export const InputNull = styled.input`
+  border: none;
+  height: 100%;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+`;
 export const Input = styled.input`
   border: 3px solid var(--main-contrast-color);
-  border-radius: 8px;
-  height: 37px;
   width: 100%;
+  height: 100%;
+
+  border-radius: 8px;
   &:hover {
-    box-shadow: 1px 1px 1px thistle;
+    box-shadow: 1px 1px 1px red;
   }
 `;
 type Prop = {

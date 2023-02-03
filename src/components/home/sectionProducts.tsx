@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Card } from "@/ui/card";
 import { Subtitle } from "@/ui/text";
+import { meProdcuts } from "@/hooks/hook";
 import {
   ResponsiveDivDisplayNone,
   ResponsiveDivDisplayInitial,
@@ -42,6 +43,13 @@ const SubtitleDiv = styled.div`
   }
 `;
 export function SectionProducts() {
+  console.log(1);
+  const data = meProdcuts();
+  if (data) {
+    const results = data.results;
+    console.log(results);
+  }
+
   return (
     <SectionProductsDiv>
       <SubtitleDiv>
@@ -55,8 +63,20 @@ export function SectionProducts() {
         </ResponsiveDivDisplayInitial>
       </SubtitleDiv>
       <SectionConten>
-        <Card />
-        <Card />
+        {data ? (
+          data.results.map((e: any) => {
+            return (
+              <Card
+                key={e.price}
+                url={e.image[0].url}
+                price={e.price}
+                name={e.name}
+              />
+            );
+          })
+        ) : (
+          <div>no hqy</div>
+        )}
       </SectionConten>
     </SectionProductsDiv>
   );

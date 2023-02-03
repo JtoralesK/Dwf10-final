@@ -23,11 +23,6 @@ export function ResponsiveWindow(p: Prop) {
   };
   return (
     <Window style={state}>
-      <SectionCross>
-        <InvisibleButton onClick={click}>
-          <CrossWhiteLogo />
-        </InvisibleButton>
-      </SectionCross>
       <SectionLinks>
         <SubtitleWhite>Ingresar</SubtitleWhite>
         <SubtitleWhite>Mi perfil</SubtitleWhite>

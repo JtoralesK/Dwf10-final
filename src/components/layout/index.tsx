@@ -1,4 +1,4 @@
-import { Header } from "@/ui/header";
+import { Header } from "@/components/header";
 import { Footer } from "@/ui/footer";
 import { ResponsiveDivDisplayNone } from "@/ui/divStyled";
 import { ResponsiveWindow } from "../responsive-windows";
@@ -13,19 +13,22 @@ export function Layout({ children }: any) {
     setHeaderState(!headerState);
   };
 
-  const position: any = headerState
-    ? { position: "fixed" }
-    : { position: "static" };
   return (
-    <div>
-      <LayoutSection style={position}>
-        <Header onClickMenu={clickMenuToggle} />
-        <ResponsiveDivDisplayNone>
-          <ResponsiveWindow onClick={clickMenuToggle} state={headerState} />
-        </ResponsiveDivDisplayNone>
-        {children}
+    <>
+      <LayoutSection>
+        <Header
+          setSearch={(e) => console.log({ 1: e })}
+          burgerButtonState={headerState}
+          onClickMenu={clickMenuToggle}
+        />
+        <div style={{ position: "relative" }}>
+          {children}
+          <ResponsiveDivDisplayNone>
+            <ResponsiveWindow onClick={clickMenuToggle} state={headerState} />
+          </ResponsiveDivDisplayNone>
+        </div>
       </LayoutSection>
       <Footer />
-    </div>
+    </>
   );
 }
