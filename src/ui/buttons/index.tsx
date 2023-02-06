@@ -3,7 +3,6 @@ export const InvisibleButton = styled.button`
   background-color: transparent;
   border: none;
 `;
-
 export const PrincipalButton = styled.button`
   height: 37px;
   width: 100%;

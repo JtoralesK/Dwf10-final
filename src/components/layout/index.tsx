@@ -16,11 +16,7 @@ export function Layout({ children }: any) {
   return (
     <>
       <LayoutSection>
-        <Header
-          setSearch={(e) => console.log({ 1: e })}
-          burgerButtonState={headerState}
-          onClickMenu={clickMenuToggle}
-        />
+        <Header burgerButtonState={headerState} onClickMenu={clickMenuToggle} />
         <div style={{ position: "relative" }}>
           {children}
           <ResponsiveDivDisplayNone>

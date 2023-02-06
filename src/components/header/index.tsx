@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { LogoWhite } from "@/ui/Logo";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { ButtonMenu } from "@/ui/buttons/burguerButton";
 import { SearchInput } from "../input-search";
 import { FucsiaButton } from "@/ui/buttons";
 import { InvisibleButton } from "@/ui/buttons";
 import { Prop } from "./headerProps";
+import { useRouter } from "next/router";
 import {
   ResponsiveDivDisplayNone,
   ResponsiveDivDisplayInitial,
@@ -30,28 +30,22 @@ const ButtonFussiaDiv = styled.div`
   width: 172px;
 `;
 export function Header(p: Prop) {
+  const router = useRouter();
   const clickMenu = () => {
-    console.log(3);
     if (p.onClickMenu) p.onClickMenu();
   };
   const clickIniciar = () => {
-    if (p.onClickIniciarSecion) p.onClickIniciarSecion();
+    router.push("/signin");
   };
   return (
     <HeaderBox>
-      <SearchInput
-        setSearch={(e) => {
-          if (p.setSearch) p.setSearch(e);
-        }}
-      />
+      <SearchInput />
       <ResponsiveDivDisplayNone>
         <InvisibleButton onClick={clickMenu}>
           <ButtonMenu state={p.burgerButtonState}></ButtonMenu>
         </InvisibleButton>
       </ResponsiveDivDisplayNone>
-      <div style={{ fontSize: "30px;" }}>
-        <AiOutlineShoppingCart style={{ color: "white", width: "20px" }} />
-      </div>
+      <AiOutlineShoppingCart style={{ color: "white", width: "20px" }} />
       <ResponsiveDivDisplayInitial>
         <ButtonFussiaDiv>
           <FucsiaButton onClick={clickIniciar}>Ingresar</FucsiaButton>

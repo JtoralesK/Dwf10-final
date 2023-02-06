@@ -1,4 +1,5 @@
 import { InputNull } from "@/ui/input";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -21,11 +22,10 @@ const NormalInput = {
   width: "180px",
   height: "40px",
 };
-type Prop = {
-  setSearch: (e: any) => any;
-};
-export function InputMobile(p: Prop) {
+
+export function InputMobile() {
   const [focus, setFocus] = useState(false);
+  const router = useRouter();
 
   const styleInput = focus ? BigInput : NormalInput;
   const inputStyle: any = focus ? { position: "absolute" } : {};
@@ -35,12 +35,12 @@ export function InputMobile(p: Prop) {
   };
   const submit = (e: any) => {
     e.preventDefault();
-    if (p.setSearch) p.setSearch(e.target.word.value);
+    router.push("/search/" + e.target.word.value);
   };
   return (
     <InputDiv style={inputStyle}>
       <div style={stateFlecha} onClick={changeState}>
-        <AiOutlineArrowLeft style={{ margin: "20px", fontSize: "30px;" }} />
+        <AiOutlineArrowLeft style={{ margin: "20px" }} />
       </div>
 
       <form style={styleInput} onSubmit={submit}>

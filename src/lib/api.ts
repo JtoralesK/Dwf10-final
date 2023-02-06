@@ -16,7 +16,7 @@ export async function fetchAPI(input: RequestInfo, options: any) {
   if (object.body) {
     object.body = JSON.stringify(object.body);
   }
-  console.log(object);
+  //console.log(object);
 
   const res: any = await fetch(url, object);
 

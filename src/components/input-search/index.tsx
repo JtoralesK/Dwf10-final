@@ -11,18 +11,12 @@ const BigInput = styled.div`
     display: initial;
   }
 `;
-type Prop = {
-  setSearch: (e: any) => any;
-};
-export function SearchInput(p: Prop) {
+
+export function SearchInput() {
   return (
     <>
       <ResponsiveDivDisplayNone>
-        <InputMobile
-          setSearch={(e) => {
-            if (p.setSearch) p.setSearch(e);
-          }}
-        />
+        <InputMobile />
       </ResponsiveDivDisplayNone>
       <BigInput>
         <Input placeholder="Buscar Producto" />

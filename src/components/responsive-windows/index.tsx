@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Subtitle } from "@/ui/text";
 import { Prop } from "./prop";
-import { SectionLinks, SectionCross } from "./windowSections";
-import { CrossWhiteLogo } from "@/ui/icons";
+import { SectionLinks } from "./windowSections";
 import { InvisibleButton } from "@/ui/buttons";
+import { useRouter } from "next/router";
+
 const SubtitleWhite = styled(Subtitle)`
   color: var(--main-color);
 `;
@@ -17,16 +18,27 @@ const Window = styled.section`
 `;
 
 export function ResponsiveWindow(p: Prop) {
+  const router = useRouter();
   const state = p.state ? { display: "initial" } : { display: "none" };
-  const click = () => {
-    if (p.onClick) p.onClick();
+  const click = (p: string) => {
+    router.push(p);
   };
   return (
     <Window style={state}>
       <SectionLinks>
-        <SubtitleWhite>Ingresar</SubtitleWhite>
-        <SubtitleWhite>Mi perfil</SubtitleWhite>
-        <SubtitleWhite>Buscar</SubtitleWhite>
+        <InvisibleButton
+          onClick={() => {
+            click("/signin");
+          }}
+        >
+          <SubtitleWhite>Ingresar</SubtitleWhite>
+        </InvisibleButton>
+        <InvisibleButton>
+          <SubtitleWhite>Mi perfil</SubtitleWhite>
+        </InvisibleButton>
+        <InvisibleButton>
+          <SubtitleWhite>Buscar</SubtitleWhite>
+        </InvisibleButton>
       </SectionLinks>
     </Window>
   );

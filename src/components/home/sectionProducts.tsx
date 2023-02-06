@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import { Card } from "@/ui/card";
 import { Subtitle } from "@/ui/text";
-import { meProdcuts } from "@/hooks/hook";
-import {
-  ResponsiveDivDisplayNone,
-  ResponsiveDivDisplayInitial,
-} from "@/ui/divStyled";
+
 const WhiteSubtitle = styled(Subtitle)`
   color: var(--main-color);
   @media (min-width: 768px) {
@@ -23,7 +18,7 @@ const SectionProductsDiv = styled.section`
     min-height: 100vh;
   }
 `;
-const SectionConten = styled.div`
+export const SectionConten = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,42 +37,14 @@ const SubtitleDiv = styled.div`
     margin-top: 70px;
   }
 `;
-export function SectionProducts() {
-  console.log(1);
-  const data = meProdcuts();
-  if (data) {
-    const results = data.results;
-    console.log(results);
-  }
 
+export function SectionProducts({ children }: any) {
   return (
     <SectionProductsDiv>
       <SubtitleDiv>
-        <ResponsiveDivDisplayNone>
-          <WhiteSubtitle>
-            Productos <br></br>Destacados
-          </WhiteSubtitle>
-        </ResponsiveDivDisplayNone>
-        <ResponsiveDivDisplayInitial>
-          <WhiteSubtitle>Productos Destacados</WhiteSubtitle>
-        </ResponsiveDivDisplayInitial>
+        <WhiteSubtitle>Productos Destacados</WhiteSubtitle>
       </SubtitleDiv>
-      <SectionConten>
-        {data ? (
-          data.results.map((e: any) => {
-            return (
-              <Card
-                key={e.price}
-                url={e.image[0].url}
-                price={e.price}
-                name={e.name}
-              />
-            );
-          })
-        ) : (
-          <div>no hqy</div>
-        )}
-      </SectionConten>
+      <SectionConten>{children}</SectionConten>
     </SectionProductsDiv>
   );
 }
