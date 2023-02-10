@@ -8,13 +8,10 @@ export const InputNull = styled.input`
   }
 `;
 export const Input = styled.input`
-  border: 3px solid var(--main-contrast-color);
   width: 100%;
   height: 100%;
-
-  border-radius: 8px;
   &:hover {
-    box-shadow: 1px 1px 1px red;
+    box-shadow: 1px 1px 1px paleturquoise;
   }
 `;
 type Prop = {

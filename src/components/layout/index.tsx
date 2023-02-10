@@ -3,10 +3,7 @@ import { Footer } from "@/ui/footer";
 import { ResponsiveDivDisplayNone } from "@/ui/divStyled";
 import { ResponsiveWindow } from "../responsive-windows";
 import { useState } from "react";
-import styled from "styled-components";
-const LayoutSection = styled.section`
-  width: 100%;
-`;
+
 export function Layout({ children }: any) {
   const [headerState, setHeaderState] = useState(false);
   const clickMenuToggle = () => {
@@ -15,15 +12,11 @@ export function Layout({ children }: any) {
 
   return (
     <>
-      <LayoutSection>
-        <Header burgerButtonState={headerState} onClickMenu={clickMenuToggle} />
-        <div style={{ position: "relative" }}>
-          {children}
-          <ResponsiveDivDisplayNone>
-            <ResponsiveWindow onClick={clickMenuToggle} state={headerState} />
-          </ResponsiveDivDisplayNone>
-        </div>
-      </LayoutSection>
+      <Header burgerButtonState={headerState} onClickMenu={clickMenuToggle} />
+      <ResponsiveDivDisplayNone>
+        <ResponsiveWindow onClick={clickMenuToggle} state={headerState} />
+      </ResponsiveDivDisplayNone>
+      {children}
       <Footer />
     </>
   );

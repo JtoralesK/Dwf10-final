@@ -1,62 +1,45 @@
 import styled from "styled-components";
-import { Subtitle, BodyTextBold } from "@/ui/text";
 import { Input } from "@/ui/input";
-import { FucsiaButton } from "@/ui/buttons";
+import { InvisibleButton } from "@/ui/buttons";
+import { Card } from "./card";
+import { BodyTextBold } from "@/ui/text";
 
-const Content = styled.div`
-  height: 300px;
-  border: 1px solid blue;
-  margin-top: 80px;
-  @media (min-width: 768px) {
-    width: 500px;
-  }
-`;
-
-const ContentButton = styled(FucsiaButton)`
-  display: block;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  padding: 20px;
-`;
 const InputContent = styled.div`
   height: 30px;
   width: 100%;
 `;
 type Prop = {
   onSubmit: (e: string) => any;
+  backSectionEmail?: () => any;
+  state: boolean;
+  email: string;
 };
 export function SectionCode(p: Prop) {
+  const corregirEmail = () => {
+    if (p.backSectionEmail) p.backSectionEmail();
+  };
   const sendCode = (e: any) => {
     e.preventDefault();
     const { codigo } = e.target;
     if (p.onSubmit) p.onSubmit(codigo.value);
   };
-
+  const stateCode = !p.state ? { display: "initial" } : { display: "none" };
   return (
-    <Content>
-      <Form onSubmit={sendCode}>
-        <Subtitle>Ingresa</Subtitle>
-        <BodyTextBold>Te enviamos tu código a jotraoesl@gmail.com</BodyTextBold>
+    <form
+      style={stateCode}
+      onSubmit={(e) => {
+        sendCode(e);
+      }}
+    >
+      <Card>
+        <BodyTextBold>Te enviamos tu código a {p.email}</BodyTextBold>
         <InputContent>
           <Input name="codigo" placeholder="Código"></Input>
-          corregir email
+          <InvisibleButton type={"button"} onClick={corregirEmail}>
+            corregir email
+          </InvisibleButton>
         </InputContent>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            width: "100%",
-          }}
-        >
-          <div style={{ textAlign: "right" }}>
-            <ContentButton>Continuar</ContentButton>
-          </div>
-        </div>
-      </Form>
-    </Content>
+      </Card>
+    </form>
   );
 }

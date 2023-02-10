@@ -1,44 +1,56 @@
 import styled from "styled-components";
-import { Subtitle } from "@/ui/text";
+import { BodyTextBold } from "@/ui/text";
 import { Prop } from "./prop";
 import { SectionLinks } from "./windowSections";
 import { InvisibleButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
-
-const SubtitleWhite = styled(Subtitle)`
-  color: var(--main-color);
-`;
+import { click, Page } from "./clickSections";
+import { AiOutlinePlus } from "react-icons/ai";
 const Window = styled.section`
+  width: 100%;
+  background-color: #fff;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--main-contrast-color);
+  z-index: 10;
+  transition: 0.7s all ease;
+  padding: 30px 10px;
 `;
-
-export function ResponsiveWindow(p: Prop) {
+const Button = styled(InvisibleButton)`
+  text-align: left;
+  padding: 20px 0;
+`;
+type ButtonProp = {
+  name: string;
+  page: Page;
+};
+function WindowButton(p: ButtonProp) {
   const router = useRouter();
-  const state = p.state ? { display: "initial" } : { display: "none" };
-  const click = (p: string) => {
-    router.push(p);
+  const onClick = () => {
+    const page = click(p.page);
+    router.push(page);
   };
   return (
-    <Window style={state}>
+    <Button onClick={onClick}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <BodyTextBold>{p.name}</BodyTextBold>
+        <AiOutlinePlus style={{ fontSize: "15px" }} />
+      </div>
+    </Button>
+  );
+}
+export function ResponsiveWindow(p: Prop) {
+  return (
+    <Window style={p.state ? { marginRight: "0%" } : { marginLeft: "-100%" }}>
       <SectionLinks>
-        <InvisibleButton
-          onClick={() => {
-            click("/signin");
-          }}
-        >
-          <SubtitleWhite>Ingresar</SubtitleWhite>
-        </InvisibleButton>
-        <InvisibleButton>
-          <SubtitleWhite>Mi perfil</SubtitleWhite>
-        </InvisibleButton>
-        <InvisibleButton>
-          <SubtitleWhite>Buscar</SubtitleWhite>
-        </InvisibleButton>
+        <WindowButton name={"Inicio"} page={"/"} />
+        <WindowButton name={"Ingresar"} page={"signin"} />
+        <WindowButton name={"Mi cuenta"} page={"profile"} />
+        <WindowButton name={"Salir"} page={"/"} />
       </SectionLinks>
     </Window>
   );

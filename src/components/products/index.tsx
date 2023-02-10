@@ -7,6 +7,7 @@ export function Products() {
   const { id } = router.query;
   const idString = JSON.stringify(id);
   const { resp, error, isLoading } = meProdcuts(idString, 2, 0);
+  console.log(resp, error);
   const click = (productId: any) => {
     router.push("/item/" + productId);
   };

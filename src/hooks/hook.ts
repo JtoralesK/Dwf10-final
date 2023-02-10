@@ -19,3 +19,8 @@ export function meProdcuts(q: string, limit: number, offset: number) {
   const resp = data ? data.results : null;
   return { resp, error, isLoading };
 }
+export function me() {
+  const { data, error, isLoading } = useSWRImmutable("/me", fetchAPI);
+  const resp = data ? data.resp : null;
+  return { resp, error, isLoading };
+}

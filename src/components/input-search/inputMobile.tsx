@@ -13,14 +13,15 @@ const InputDiv = styled.div`
   right: 0;
   bottom: 0;
   background-color: white;
+  border-bottom: solid 0.2px;
 `;
 const BigInput = {
   width: "100%",
   height: "100%",
 };
 const NormalInput = {
-  width: "180px",
-  height: "40px",
+  width: "220px",
+  height: "30px",
 };
 
 export function InputMobile() {

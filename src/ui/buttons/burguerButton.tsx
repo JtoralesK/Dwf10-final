@@ -1,14 +1,17 @@
-import css from "./burguerButton.module.css";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 type Prop = {
   state: boolean;
 };
 function ButtonMenu(p: Prop) {
+  const style = { fontSize: "30px", fill: "white" };
   return (
-    <span className={p.state ? css.cruz : css.menu}>
-      <div></div>
-      <div></div>
-      <div></div>
-    </span>
+    <>
+      {p.state ? (
+        <AiOutlineClose style={style} />
+      ) : (
+        <AiOutlineMenu style={style} />
+      )}
+    </>
   );
 }
 
