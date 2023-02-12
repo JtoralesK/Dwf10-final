@@ -4,9 +4,13 @@ const SliderDiv = styled.div`
   background-color: floralwhite;
 `;
 const Img = styled.img`
-  flex: 1 0 100%;
-  scroll-snap-align: start;
   object-fit: cover;
+  width: 100%;
+  object-position: top;
+  height: 300px;
+  display: block;
+  overflow-clip-margin: content-box;
+  overflow: clip;
 `;
 
 const Slider = styled.div`
@@ -41,11 +45,21 @@ const AHrefSlider = styled.a`
 export function SliderImg() {
   return (
     <SliderDiv>
-      <div style={{ position: "relative", margin: "0 auto" }}>
+      <div>
+        <Img
+          id="imgSlider-1"
+          src="https://res.cloudinary.com/apxschool/image/upload/v1676112920/D_NQ_896432-MLA53607208617_022023-OO_pzr3vf.webp"
+          alt=""
+        />
+      </div>
+    </SliderDiv>
+  );
+}
+/* <div style={{ position: "relative", margin: "0 auto" }}>
         <Slider>
           <Img
             id="imgSlider-1"
-            src="https://res.cloudinary.com/apxschool/image/upload/v1676043313/16303836_pf-s73-eve-set-14-mockup-min_ujva4p.jpg"
+            src="https://res.cloudinary.com/apxschool/image/upload/v1676112920/D_NQ_896432-MLA53607208617_022023-OO_pzr3vf.webp"
             alt=""
           />
           <Img
@@ -64,14 +78,4 @@ export function SliderImg() {
           <AHrefSlider href="#imgSlider-2" />
           <AHrefSlider href="#imgSlider-3" />
         </DivNav>
-      </div>
-    </SliderDiv>
-  );
-}
-/*style={{
-            display: "flex",
-            aspectRatio: "16/9,",
-            overflow: "auto",
-            scrollSnapType: "x mandatory",
-            scrollBehavior: "smooth",
-          }}*/
+      </div>*/

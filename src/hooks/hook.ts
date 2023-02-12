@@ -11,9 +11,9 @@ export function useProduct(id: string) {
   return { resp, error, isLoading };
 }
 
-export function meProdcuts(q: string, limit: number, offset: number) {
+export function searchProducts(q: string, limit: number, offset: number) {
   const { data, error, isLoading } = useSWRImmutable(
-    `/search?q=${q}&offset=0&limit=2`,
+    `/search?q=${q}&offset=${offset}&limit=${limit}`,
     fetchAPI
   );
   const resp = data ? data.results : null;

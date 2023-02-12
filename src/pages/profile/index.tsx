@@ -1,3 +1,4 @@
-export default function Profile() {
-  return <div>soy profile</div>;
+import { Profile } from "@/components/profile";
+export default function ProfilePage() {
+  return <Profile></Profile>;
 }

@@ -1,22 +1,16 @@
 import styled from "styled-components";
 import { Subtitle } from "@/ui/text";
-
-const WhiteSubtitle = styled(Subtitle)`
-  color: var(--main-color);
-  @media (min-width: 768px) {
-    color: var(--main-contrast-color);
-  }
-`;
+import { Products } from "./products";
+import {
+  ResponsiveDivDisplayInitial,
+  ResponsiveDivDisplayNone,
+} from "@/ui/divStyled";
 const SectionProductsDiv = styled.section`
-  background-color: var(--sixth-color);
+  background-color: #ebebeb;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 150vh;
-  @media (min-width: 768px) {
-    background-color: var(--third-color);
-    min-height: 100vh;
-  }
+  min-height: 100vh;
 `;
 export const SectionConten = styled.div`
   display: flex;
@@ -33,18 +27,22 @@ export const SectionConten = styled.div`
 const SubtitleDiv = styled.div`
   text-align: center;
   margin-top: 55px;
-  @media (min-width: 768px) {
-    margin-top: 70px;
-  }
 `;
 
-export function SectionProducts({ children }: any) {
+export function SectionProducts() {
   return (
     <SectionProductsDiv>
       <SubtitleDiv>
-        <WhiteSubtitle>Productos Destacados</WhiteSubtitle>
+        <Subtitle>Productos Trending</Subtitle>
       </SubtitleDiv>
-      <SectionConten>{children}</SectionConten>
+      <SectionConten>
+        <ResponsiveDivDisplayInitial>
+          <Products responsive={true} />
+        </ResponsiveDivDisplayInitial>
+        <ResponsiveDivDisplayNone>
+          <Products responsive={false} />
+        </ResponsiveDivDisplayNone>
+      </SectionConten>
     </SectionProductsDiv>
   );
 }

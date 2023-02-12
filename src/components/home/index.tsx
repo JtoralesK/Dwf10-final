@@ -1,13 +1,10 @@
-import { SectionEccomerce } from "./sectionSearchProduct";
+import { SectionEccomerce } from "./sectionEcommerce";
 import { SectionProducts } from "./sectionProducts";
-import { Products } from "./products";
 export function HomeSection() {
   return (
     <div>
       <SectionEccomerce />
-      <SectionProducts>
-        <Products />
-      </SectionProducts>
+      <SectionProducts></SectionProducts>
     </div>
   );
 }

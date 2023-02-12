@@ -1,18 +1,12 @@
 import { Layout } from "@/components/layout";
+import { SectionSearch } from "@/components/search/index";
 import { useRouter } from "next/router";
-import { meProdcuts } from "@/hooks/hook";
-import { SectionProducts } from "@/components/home/sectionProducts";
-import { Products } from "@/components/products";
 export default function Home() {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <Layout>
-      <div
-        style={{ minHeight: "80vh", width: "100%", backgroundColor: "beige" }}
-      >
-        <SectionProducts>
-          <Products />
-        </SectionProducts>
-      </div>
+      <SectionSearch typeProduct={id as string}></SectionSearch>
     </Layout>
   );
 }

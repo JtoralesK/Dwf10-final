@@ -8,7 +8,7 @@ import { click, Page } from "./clickSections";
 import { AiOutlinePlus } from "react-icons/ai";
 const Window = styled.section`
   width: 100%;
-  background-color: #fff;
+  background-color: #faf6d0;
   position: absolute;
   z-index: 10;
   transition: 0.7s all ease;
