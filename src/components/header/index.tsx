@@ -6,12 +6,13 @@ import { FucsiaButton } from "@/ui/buttons";
 import { InvisibleButton } from "@/ui/buttons";
 import { Prop } from "./headerProps";
 import { useRouter } from "next/router";
-import { getToken } from "@/lib/localStorage";
 import { WhiteLogo } from "@/ui/icons";
+import { me } from "@/hooks/me";
 import {
   ResponsiveDivDisplayNone,
   ResponsiveDivDisplayInitial,
 } from "@/ui/divStyled";
+import { useState } from "react";
 const HeaderBox = styled.header`
   background-color: var(--main-contrast-color);
   height: 70px;
@@ -32,12 +33,15 @@ const ButtonFussiaDiv = styled.div`
 `;
 export function Header(p: Prop) {
   const router = useRouter();
+  const { resp, error, isLoading } = me();
+  let logged: boolean = false;
+  if (resp) logged = !resp.error ?? true;
+
   const clickMenu = () => {
     if (p.onClickMenu) p.onClickMenu();
   };
   const clickIniciar = () => {
-    const token = getToken();
-    if (token) router.push("/profile");
+    if (p) router.push("/profile");
     router.push("/signin");
   };
   const home = () => {
@@ -57,9 +61,11 @@ export function Header(p: Prop) {
       </ResponsiveDivDisplayNone>
       <AiOutlineShoppingCart style={style} />
       <ResponsiveDivDisplayInitial>
-        <ButtonFussiaDiv>
-          <FucsiaButton onClick={clickIniciar}>Ingresar</FucsiaButton>
-        </ButtonFussiaDiv>
+        {!logged && (
+          <ButtonFussiaDiv>
+            <FucsiaButton onClick={clickIniciar}>Ingresar</FucsiaButton>
+          </ButtonFussiaDiv>
+        )}
       </ResponsiveDivDisplayInitial>
     </HeaderBox>
   );

@@ -6,7 +6,7 @@ const DivCenterSection = styled.div`
   flex-direction: column;
   align-items: center;
   height: 90vh;
-  background-color: #efefef;
+  background-color: var(--second-color);
 `;
 
 export function SectionEccomerce() {

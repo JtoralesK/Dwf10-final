@@ -4,6 +4,7 @@ import { useProduct } from "@/hooks/hook";
 import { useRouter } from "next/router";
 import { FucsiaButton } from "@/ui/buttons";
 import { createOrder } from "@/lib/api";
+import { GoMercadoPago } from "@/hooks/hook";
 const WhiteText = styled(LargueTextBold)`
   color: var(--main-color);
 `;
@@ -21,20 +22,29 @@ const BodyCheckout = styled.section`
   padding: 10px;
 `;
 export default function OrderId() {
+  const { loading, go } = GoMercadoPago();
   const router = useRouter();
   const { id } = router.query;
   const { resp, error, isLoading } = useProduct(id as string);
+  console.log({ loading }, 12);
   const buy = () => {
     createOrder(id as string).then((e) => {
-      console.log(e, 1);
-      router.push(e.link);
-      //router.push("")
+      go(e.link);
     });
-    //console.log(1231);
-    //if (resp) console.log(resp);
   };
 
-  if (isLoading) return <div>loading</div>;
+  if (isLoading || loading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          backgroundColor: "papayawhip",
+        }}
+      >
+        loading
+      </div>
+    );
   if (resp)
     return (
       <CheckoutBody>

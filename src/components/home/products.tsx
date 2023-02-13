@@ -29,7 +29,7 @@ export function Products(p: Prop) {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center;",
+          alignItems: "center",
         }}
       >
         <BoxCardItems>

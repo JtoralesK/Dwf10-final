@@ -6,6 +6,7 @@ import { InvisibleButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
 import { click, Page } from "./clickSections";
 import { AiOutlinePlus } from "react-icons/ai";
+import { me } from "@/hooks/me";
 const Window = styled.section`
   width: 100%;
   background-color: #faf6d0;
@@ -13,6 +14,7 @@ const Window = styled.section`
   z-index: 10;
   transition: 0.7s all ease;
   padding: 30px 10px;
+  height: 100vh;
 `;
 const Button = styled(InvisibleButton)`
   text-align: left;
@@ -44,11 +46,14 @@ function WindowButton(p: ButtonProp) {
   );
 }
 export function ResponsiveWindow(p: Prop) {
+  const { resp, error, isLoading } = me();
+  let logged: boolean = false;
+  if (resp) logged = !resp.error && true;
   return (
     <Window style={p.state ? { marginRight: "0%" } : { marginLeft: "-100%" }}>
       <SectionLinks>
         <WindowButton name={"Inicio"} page={"/"} />
-        <WindowButton name={"Ingresar"} page={"signin"} />
+        {!logged && <WindowButton name={"Ingresar"} page={"signin"} />}
         <WindowButton name={"Mi cuenta"} page={"profile"} />
         <WindowButton name={"Salir"} page={"/"} />
       </SectionLinks>
