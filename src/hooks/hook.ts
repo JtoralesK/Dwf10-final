@@ -22,17 +22,7 @@ export function searchProducts(q: string, limit: number, offset: number) {
   return { resp, error, isLoading };
 }
 
-export function GoMercadoPago() {
-  const [loading, setLoading] = useState(false);
+export function GoMercadoPago(link: string) {
   const router = useRouter();
-  setLoading(true);
-
-  async function go(link: string) {
-    router.push(link);
-    setLoading(false);
-  }
-  return {
-    loading,
-    go,
-  };
+  router.push(link);
 }

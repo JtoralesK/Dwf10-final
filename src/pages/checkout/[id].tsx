@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { FucsiaButton } from "@/ui/buttons";
 import { createOrder } from "@/lib/api";
 import { GoMercadoPago } from "@/hooks/hook";
+import { useState } from "react";
 const WhiteText = styled(LargueTextBold)`
   color: var(--main-color);
 `;
@@ -22,18 +23,20 @@ const BodyCheckout = styled.section`
   padding: 10px;
 `;
 export default function OrderId() {
-  const { loading, go } = GoMercadoPago();
+  const [state, setLoading] = useState(false);
+  console.log(state);
+
   const router = useRouter();
   const { id } = router.query;
   const { resp, error, isLoading } = useProduct(id as string);
-  console.log({ loading }, 12);
   const buy = () => {
+    setLoading(true);
     createOrder(id as string).then((e) => {
-      go(e.link);
+      router.push(e.link);
     });
   };
 
-  if (isLoading || loading)
+  if (isLoading || state)
     return (
       <div
         style={{
