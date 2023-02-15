@@ -1,9 +1,10 @@
-export type Page = "profile" | "signin" | "/";
+export type Page = "profile" | "signin" | "/" | "salir";
 
 export const click = (p: Page) => {
   const pages = {
     profile: "/profile",
     signin: "/signin",
+    salir: "/",
     "/": "/",
   };
 

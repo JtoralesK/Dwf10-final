@@ -2,6 +2,9 @@ export function getMeLocalStorage() {
   const data = localStorage.getItem("me");
   return data;
 }
+export function deleteMeLocalStorage() {
+  const data = localStorage.removeItem("me");
+}
 export function getToken() {
   let data: any = getMeLocalStorage();
   if (data) {

@@ -34,6 +34,7 @@ const ButtonFussiaDiv = styled.div`
 export function Header(p: Prop) {
   const router = useRouter();
   const { resp, error, isLoading } = me();
+
   let logged: boolean = false;
   if (resp) logged = !resp.error ?? true;
 

@@ -4,6 +4,7 @@ import { LargueText, BodyTextBold, LargueTextBold, BodyText } from "@/ui/text";
 import { NaranjaButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
 import { getToken } from "@/lib/localStorage";
+import { me } from "@/hooks/me";
 const DivImg = styled.img`
   width: 100%;
   height: 300px;
@@ -37,12 +38,18 @@ const ItemContentDescription = styled.div`
   margin: 20px 0;
 `;
 export function Item(prop: Prop) {
+  const { resp, error, isLoading } = me();
+  let logged: boolean = false;
+  if (resp) logged = !resp.error ?? true;
+  console.log(logged);
+
   const item = prop.data;
   const router = useRouter();
   const buy = () => {
-    const token = getToken();
-    if (token === null) router.push("/signin");
-    router.push("/checkout/" + item.objectID);
+    if (!logged) router.push("/signin");
+    else {
+      router.push("/checkout/" + item.objectID);
+    }
   };
   return (
     <>

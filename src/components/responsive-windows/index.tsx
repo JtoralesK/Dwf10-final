@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { click, Page } from "./clickSections";
 import { AiOutlinePlus } from "react-icons/ai";
 import { me } from "@/hooks/me";
+import { mutate } from "swr";
+import { deleteMeLocalStorage } from "@/lib/localStorage";
 const Window = styled.section`
   width: 100%;
   background-color: #faf6d0;
@@ -28,6 +30,10 @@ function WindowButton(p: ButtonProp) {
   const router = useRouter();
   const onClick = () => {
     const page = click(p.page);
+    if (p.page == "salir") {
+      deleteMeLocalStorage();
+      mutate("/me", null, false);
+    }
     router.push(page);
   };
   return (
@@ -55,7 +61,7 @@ export function ResponsiveWindow(p: Prop) {
         <WindowButton name={"Inicio"} page={"/"} />
         {!logged && <WindowButton name={"Ingresar"} page={"signin"} />}
         <WindowButton name={"Mi cuenta"} page={"profile"} />
-        <WindowButton name={"Salir"} page={"/"} />
+        <WindowButton name={"Salir"} page={"salir"} />
       </SectionLinks>
     </Window>
   );
