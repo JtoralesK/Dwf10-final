@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { BodyTextBold } from "@/ui/text";
 import { Input } from "@/ui/input";
 import { Card } from "./card";
-import { sendCode } from "@/lib/api";
 const InputContent = styled.div`
   height: 30px;
   width: 100%;

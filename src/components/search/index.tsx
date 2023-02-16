@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { LargueTextBold } from "@/ui/text";
-import { HorizontalCard } from "@/ui/card/card-horizontal";
+import {
+  HorizontalCard,
+  HorizontalCardEskeleton,
+} from "@/ui/card/card-horizontal";
 import { searchProducts } from "@/hooks/hook";
 import { useRouter } from "next/router";
 const SectionSearchContent = styled.section`
@@ -25,6 +28,7 @@ const SubtitleDiv = styled.div`
 type Prop = {
   typeProduct: string;
 };
+const v = [1, 2, 3];
 export function SectionSearch(p: Prop) {
   const router = useRouter();
   const click = (objectID: any) => {
@@ -38,10 +42,10 @@ export function SectionSearch(p: Prop) {
         <SubtitleDiv>
           <LargueTextBold>Productos Destacados</LargueTextBold>
         </SubtitleDiv>
-        {resp ? (
-          resp.map((obj: any) => {
-            return (
-              <div style={{ margin: "10px" }}>
+        <div style={{ margin: "10px" }}>
+          {resp ? (
+            resp.map((obj: any) => {
+              return (
                 <HorizontalCard
                   onClick={() => {
                     click(obj.objectID);
@@ -51,12 +55,16 @@ export function SectionSearch(p: Prop) {
                   name={obj.name}
                   price={obj.price}
                 />
-              </div>
-            );
-          })
-        ) : (
-          <p>cargando</p>
-        )}
+              );
+            })
+          ) : (
+            <div>
+              <HorizontalCardEskeleton></HorizontalCardEskeleton>
+              <HorizontalCardEskeleton></HorizontalCardEskeleton>
+              <HorizontalCardEskeleton></HorizontalCardEskeleton>
+            </div>
+          )}
+        </div>
       </SectionConten>
     </SectionSearchContent>
   );

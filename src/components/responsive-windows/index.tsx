@@ -4,11 +4,11 @@ import { Prop } from "./prop";
 import { SectionLinks } from "./windowSections";
 import { InvisibleButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
-import { click, Page } from "./clickSections";
 import { AiOutlinePlus } from "react-icons/ai";
 import { me } from "@/hooks/me";
 import { mutate } from "swr";
 import { deleteMeLocalStorage } from "@/lib/localStorage";
+type Page = "/signin" | "/salir" | "/" | "/profile";
 const Window = styled.section`
   width: 100%;
   background-color: #faf6d0;
@@ -28,13 +28,22 @@ type ButtonProp = {
 };
 function WindowButton(p: ButtonProp) {
   const router = useRouter();
+  const { resp, error } = me();
   const onClick = () => {
-    const page = click(p.page);
-    if (p.page == "salir") {
+    if (p.page == "/salir") {
       deleteMeLocalStorage();
       mutate("/me", null, false);
+      router.push("/");
     }
-    router.push(page);
+    if (p.page == "/profile") {
+      if (resp) router.push("/profile");
+      router.push("/signin");
+    }
+    if (p.page == "/signin") {
+      router.push("/signin");
+    }
+
+    // if (p.page != "/profile") router.push(p.page);
   };
   return (
     <Button onClick={onClick}>
@@ -59,9 +68,9 @@ export function ResponsiveWindow(p: Prop) {
     <Window style={p.state ? { marginRight: "0%" } : { marginLeft: "-100%" }}>
       <SectionLinks>
         <WindowButton name={"Inicio"} page={"/"} />
-        {!logged && <WindowButton name={"Ingresar"} page={"signin"} />}
-        <WindowButton name={"Mi cuenta"} page={"profile"} />
-        <WindowButton name={"Salir"} page={"salir"} />
+        {!logged && <WindowButton name={"Ingresar"} page={"/signin"} />}
+        <WindowButton name={"Mi cuenta"} page={"/profile"} />
+        <WindowButton name={"Salir"} page={"/salir"} />
       </SectionLinks>
     </Window>
   );

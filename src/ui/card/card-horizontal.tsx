@@ -1,6 +1,31 @@
 import styled from "styled-components";
 import { BodyTextBold, LargueText } from "../text";
 import { CardProp } from "./props";
+import { Skeleton } from "@mui/material";
+const Eskeleto = styled.div`
+  width: 370px;
+  @media (min-width: 768px) {
+    min-width: 750px;
+  }
+`;
+
+export const HorizontalCardEskeleton = () => {
+  return (
+    <CardSkeleton>
+      <Skeleton variant="rectangular" width={"35%"} height={192} />
+      <div style={{ width: "65%" }}>
+        <br />
+        <br />
+        <br />
+        <Skeleton variant="rectangular" width={"90%"} height={20} />
+        <br />
+        <Skeleton variant="rectangular" width={"80%"} height={20} />
+        <br />
+        <Skeleton variant="rectangular" width={"65%"} height={20} />
+      </div>
+    </CardSkeleton>
+  );
+};
 const Card = styled.div`
   width: 370px;
   background-color: white;
@@ -14,14 +39,22 @@ const Card = styled.div`
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
 `;
+const CardSkeleton = styled(Card)`
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  justify-content: space-between;
+  gap: 5px;
+`;
 const ImgCard = styled.img`
-  width: 144px;
+  width: 35%;
   height: 192px;
   padding: 5px;
 `;
 
 const ContentCard = styled.div`
   padding: 10px;
+  width: 65%;
 `;
 const ContentTexts = styled.div`
   display: flex;

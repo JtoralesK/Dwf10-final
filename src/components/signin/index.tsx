@@ -4,7 +4,7 @@ import { SectionCode } from "./sectionCode";
 import { useState } from "react";
 import { obtainToken } from "@/lib/api";
 import { sendCode } from "@/lib/api";
-
+import { mutate } from "swr";
 const SectionSigning = styled.section`
   width: 100%;
   min-height: 100vh;
@@ -18,12 +18,13 @@ export function SigninContent() {
   const [email, setEmail] = useState("");
   const getToken = (code: any) => {
     obtainToken(email, code).then((e) => {
-      console.log({ e });
+      console.log(e);
+      mutate("/me");
     });
   };
   const submitEmail = (e: any) => {
-    sendCode(e).then((e) => {
-      console.log(e);
+    sendCode(e).then((code) => {
+      console.log(code);
     });
     setEmail(e);
     changeSection();
