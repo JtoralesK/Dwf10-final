@@ -2,6 +2,9 @@ import styled from "styled-components";
 export const InvisibleButton = styled.button`
   background-color: transparent;
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const PrincipalButton = styled.button`
   height: 37px;

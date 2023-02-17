@@ -57,3 +57,9 @@ export function createOrder(id: string) {
     method: "POST",
   });
 }
+export async function updatePerfil(nombre: string, address: string) {
+  return fetchAPI("/me", {
+    method: "PATCH",
+    body: { nombre, address },
+  });
+}

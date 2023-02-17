@@ -18,5 +18,5 @@ type Prop = {
   placeholder: string;
 };
 export function InputText(prop: Prop) {
-  return <Input type={"text"} placeholder={prop.placeholder}></Input>;
+  return <Input type={"text"} placeholder={prop.placeholder} required></Input>;
 }

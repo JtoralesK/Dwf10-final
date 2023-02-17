@@ -1,46 +1,45 @@
-import { Layout } from "@/components/layout";
-import styled from "styled-components";
-import { LargueTextBold, BodyTextBold } from "@/ui/text";
+import { UpdateProfile } from "./updateProfile";
 import { me } from "@/hooks/me";
-const SectionProfile = styled.div`
-  width: 100%;
-  background-color: var(--second-color);
-`;
-const Content = styled.div`
-  width: 90%;
-  @media (min-width: 768px) {
-    width: 60%;
-  }
-  min-height: 90vh;
-  padding-top: 30px;
-  margin: auto;
-`;
-const MyDateCard = styled.div`
-  width: 100%;
-  height: 74px;
-  background-color: #ffffff;
-  border-radius: 3px;
-`;
-const ContendCards = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
+import { SectionProfile } from "./profileSection";
+import { useState } from "react";
+import { updatePerfil } from "@/lib/api";
+import { mutate } from "swr";
 export function Profile() {
+  const [page, setPage] = useState(false);
   const { resp: data } = me();
-  console.log(data);
-  return (
-    <Layout>
-      <SectionProfile>
-        <Content>
-          <LargueTextBold>Mis datos</LargueTextBold>
-          <BodyTextBold>Datos de la cuenta</BodyTextBold>
-          <ContendCards>
-            <MyDateCard>Email:{data && <p>{data.email}</p>}</MyDateCard>
-          </ContendCards>
-        </Content>
-      </SectionProfile>
-    </Layout>
-  );
+  const change = () => {
+    setPage(!page);
+  };
+  const update = (e: any) => {
+    updatePerfil(e.nombre, e.address).then(() => {
+      mutate("/me");
+    });
+  };
+  if (data) {
+    const toUpdate = data.nombre == null || data.address == null;
+    if (toUpdate) {
+      return (
+        <UpdateProfile
+          onSubmit={(e) => {
+            update(e);
+          }}
+          changeSection={change}
+          must={false}
+        />
+      );
+    }
+  }
+  if (!data) return <div>loading</div>;
+  if (page)
+    return (
+      <UpdateProfile
+        onSubmit={(e) => {
+          update(e);
+        }}
+        changeSection={change}
+        must={true}
+      />
+    );
+
+  return <SectionProfile changeSection={change}></SectionProfile>;
 }

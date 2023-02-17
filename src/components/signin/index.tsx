@@ -5,6 +5,7 @@ import { useState } from "react";
 import { obtainToken } from "@/lib/api";
 import { sendCode } from "@/lib/api";
 import { mutate } from "swr";
+import { useRouter } from "next/router";
 const SectionSigning = styled.section`
   width: 100%;
   min-height: 100vh;
@@ -16,10 +17,11 @@ const SectionSigning = styled.section`
 export function SigninContent() {
   const [sectionState, setSectionState] = useState(true);
   const [email, setEmail] = useState("");
+  const router = useRouter();
   const getToken = (code: any) => {
     obtainToken(email, code).then((e) => {
-      console.log(e);
       mutate("/me");
+      router.push("/profile");
     });
   };
   const submitEmail = (e: any) => {
