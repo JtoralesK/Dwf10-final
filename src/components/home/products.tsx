@@ -3,35 +3,41 @@ import { CardSmall } from "@/ui/card/card-small";
 import { CardMedium } from "@/ui/card/card-Big";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-type Prop = {
-  responsive: boolean;
-};
-export function Products(p: Prop) {
-  const cant = p.responsive ? 5 : 4;
+export function Products() {
+  let cant = 4;
+  if (process.browser) {
+    if (window.innerWidth > 678) cant = 5;
+  }
+
   const { resp, error, isLoading } = searchProducts("a", cant, 0);
   const router = useRouter();
   const BoxCardItems = styled.div`
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     width: 100%;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
+    @media (min-width: 678px) {
+      justify-content: space-between;
+      gap: 0px;
+    }
+  `;
+  const SectionProductsContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   `;
   if (isLoading) return <h1>loaging</h1>;
   if (error) return <>error</>;
   const click = (objectID: any) => {
     router.push("/item/" + objectID);
   };
-  const CardRespnsive = p.responsive ? CardMedium : CardSmall;
+  const CardRespnsive = cant > 4 ? CardMedium : CardSmall;
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <SectionProductsContent>
         <BoxCardItems>
           {resp ? (
             resp.map((obj: any) => {
@@ -51,7 +57,7 @@ export function Products(p: Prop) {
             <p>cargando</p>
           )}
         </BoxCardItems>
-      </div>
+      </SectionProductsContent>
     </>
   );
 }

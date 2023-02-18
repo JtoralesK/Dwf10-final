@@ -1,27 +1,25 @@
 import styled from "styled-components";
 import { Subtitle } from "@/ui/text";
 import { Products } from "./products";
-import {
-  ResponsiveDivDisplayInitial,
-  ResponsiveDivDisplayNone,
-} from "@/ui/divStyled";
+
 const SectionProductsDiv = styled.section`
-  background-color: #ebebeb;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  min-height: 120vh;
+  @media (min-width: 678px) {
+    min-height: 100vh;
+  }
 `;
 export const SectionConten = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-  gap: 20px;
+  width: 100%;
   @media (min-width: 768px) {
     flex-direction: row;
     margin-top: 80px;
-    gap: 50px;
   }
 `;
 const SubtitleDiv = styled.div`
@@ -36,12 +34,7 @@ export function SectionProducts() {
         <Subtitle>Productos Trending</Subtitle>
       </SubtitleDiv>
       <SectionConten>
-        <ResponsiveDivDisplayInitial>
-          <Products responsive={true} />
-        </ResponsiveDivDisplayInitial>
-        <ResponsiveDivDisplayNone>
-          <Products responsive={false} />
-        </ResponsiveDivDisplayNone>
+        <Products />
       </SectionConten>
     </SectionProductsDiv>
   );

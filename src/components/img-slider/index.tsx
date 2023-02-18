@@ -1,16 +1,11 @@
 import styled from "styled-components";
 const SliderDiv = styled.div`
   width: 100%;
-  background-color: floralwhite;
 `;
 const Img = styled.img`
   object-fit: cover;
   width: 100%;
-  object-position: top;
-  height: 300px;
-  display: block;
-  overflow-clip-margin: content-box;
-  overflow: clip;
+  height: 280px;
 `;
 
 const Slider = styled.div`
@@ -45,13 +40,11 @@ const AHrefSlider = styled.a`
 export function SliderImg() {
   return (
     <SliderDiv>
-      <div>
-        <Img
-          id="imgSlider-1"
-          src="https://res.cloudinary.com/apxschool/image/upload/v1676112920/D_NQ_896432-MLA53607208617_022023-OO_pzr3vf.webp"
-          alt=""
-        />
-      </div>
+      <Img
+        id="imgSlider-1"
+        src="https://res.cloudinary.com/apxschool/image/upload/v1676112920/D_NQ_896432-MLA53607208617_022023-OO_pzr3vf.webp"
+        alt=""
+      />
     </SliderDiv>
   );
 }
