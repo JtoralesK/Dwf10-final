@@ -15,6 +15,7 @@ const ContentImg = styled.div`
 `;
 const Section = styled.div`
   min-height: 50vh;
+  width: 100%;
   @media (min-width: 678px) {
     width: 80%;
   }
