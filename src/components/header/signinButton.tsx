@@ -13,8 +13,6 @@ import { ResponsiveDivDisplayInitial } from "@/ui/divStyled";
 
 export const SingninButton = () => {
   const { resp: data, isLoading } = me();
-  console.log(data);
-
   const router = useRouter();
   const clickIniciar = () => {
     if (data) router.push("/profile");

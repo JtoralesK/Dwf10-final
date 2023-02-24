@@ -21,16 +21,14 @@ export function SigninContent() {
   const router = useRouter();
   const getToken = (code: any) => {
     obtainToken(email, code).then((e: any) => {
-      if (e.id) {
+      if (e.token) {
         mutate("/me");
         router.push("/profile");
       } else serStateError(true);
     });
   };
   const submitEmail = (e: any) => {
-    sendCode(e).then((code) => {
-      console.log(code);
-    });
+    sendCode(e).then((code) => {});
     setEmail(e);
     changeSection();
   };

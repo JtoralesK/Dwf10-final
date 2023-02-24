@@ -42,7 +42,7 @@ export async function obtainToken(email: string, code: string) {
   }
   if (data) {
     saveToken(data.token);
-    return true;
+    return data;
   }
 }
 export async function obtainSomeProducts() {

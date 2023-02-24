@@ -2,66 +2,38 @@ import styled from "styled-components";
 import { BodyTextBold } from "@/ui/text";
 import { Prop } from "./prop";
 import { SectionLinks } from "./windowSections";
-import { InvisibleButton } from "@/ui/buttons";
-import { useRouter } from "next/router";
-import { AiOutlinePlus } from "react-icons/ai";
+import { WindowButton } from "./windowSections";
 import { me } from "@/hooks/me";
+import { LoaderCircular } from "@/ui/loaders/loader";
 import { mutate } from "swr";
 import { deleteMeLocalStorage } from "@/lib/localStorage";
-type Page = "/signin" | "/salir" | "/" | "/profile";
-const Window = styled.section`
+import { useRouter } from "next/router";
+import { ContrastButton } from "@/ui/buttons";
+const Window = styled.div`
   width: 100%;
   background-color: #faf6d0;
   position: absolute;
   z-index: 10;
   transition: 0.7s all ease;
   padding: 30px 10px;
-  height: 100vh;
 `;
-const Button = styled(InvisibleButton)`
-  text-align: left;
-  padding: 20px 0;
+const LinkCerrarSecion = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 15vh;
 `;
-type ButtonProp = {
-  name: string;
-  page: Page;
-};
-function WindowButton(p: ButtonProp) {
-  const router = useRouter();
-  const { resp, error } = me();
-  const onClick = () => {
-    if (p.page == "/salir") {
-      deleteMeLocalStorage();
-      mutate("/me", null, false);
-      router.push("/");
-    }
-    if (p.page == "/profile") {
-      if (resp) router.push("/profile");
-      router.push("/signin");
-    }
-    if (p.page == "/signin") {
-      router.push("/signin");
-    }
-
-    // if (p.page != "/profile") router.push(p.page);
-  };
-  return (
-    <Button onClick={onClick}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <BodyTextBold>{p.name}</BodyTextBold>
-        <AiOutlinePlus style={{ fontSize: "15px" }} />
-      </div>
-    </Button>
-  );
-}
+const EmailBrown = styled(BodyTextBold)`
+  color: var(--main-contrast-color);
+`;
 export function ResponsiveWindow(p: Prop) {
-  const { resp, error, isLoading } = me();
+  const { resp, isLoading } = me();
+  const router = useRouter();
+  const salir = () => {
+    deleteMeLocalStorage();
+    mutate("/me", null, false);
+    router.push("/");
+  };
   let logged: boolean = false;
   if (resp) logged = !resp.error && true;
   return (
@@ -70,8 +42,18 @@ export function ResponsiveWindow(p: Prop) {
         <WindowButton name={"Inicio"} page={"/"} />
         {!logged && <WindowButton name={"Ingresar"} page={"/signin"} />}
         <WindowButton name={"Mi cuenta"} page={"/profile"} />
-        <WindowButton name={"Salir"} page={"/salir"} />
       </SectionLinks>
+      <LinkCerrarSecion>
+        {isLoading && <LoaderCircular />}
+        {logged && (
+          <LinkCerrarSecion>
+            <EmailBrown>{resp && resp.email}</EmailBrown>
+            <ContrastButton onClick={salir}>
+              <BodyTextBold>Cerrar Seción</BodyTextBold>
+            </ContrastButton>
+          </LinkCerrarSecion>
+        )}
+      </LinkCerrarSecion>
     </Window>
   );
 }
