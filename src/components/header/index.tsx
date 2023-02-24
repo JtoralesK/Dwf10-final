@@ -6,10 +6,8 @@ import { InvisibleButton } from "@/ui/buttons";
 import { Prop } from "./headerProps";
 import { useRouter } from "next/router";
 import { WhiteLogo } from "@/ui/icons";
-import { me } from "@/hooks/me";
 import { LargueTextBold } from "@/ui/text";
-import { mutate } from "swr";
-import { deleteMeLocalStorage } from "@/lib/localStorage";
+import { SingninButton } from "./signinButton";
 const WhiteLargueTextBold = styled(LargueTextBold)`
   color: white;
 `;
@@ -32,38 +30,7 @@ const HeaderBox = styled.header`
     position: static;
   }
 `;
-const ButtonFussiaDiv = styled.div`
-  width: 172px;
-`;
-const SingninButton = () => {
-  const { resp: data, isLoading } = me();
-  if (data) console.log({ data, 2: "2" });
 
-  const router = useRouter();
-  const clickIniciar = () => {
-    if (data) router.push("/profile");
-    router.push("/signin");
-  };
-  const salir = () => {
-    deleteMeLocalStorage();
-    mutate("/me", null, false);
-    router.push("/");
-  };
-  if (isLoading) return <p>loading</p>;
-  return (
-    <ResponsiveDivDisplayInitial>
-      {data.email ? (
-        <InvisibleButton onClick={salir}>
-          <WhiteLargueTextBold>Cerrar Secion</WhiteLargueTextBold>
-        </InvisibleButton>
-      ) : (
-        <InvisibleButton onClick={clickIniciar}>
-          <WhiteLargueTextBold>Ingresá</WhiteLargueTextBold>
-        </InvisibleButton>
-      )}
-    </ResponsiveDivDisplayInitial>
-  );
-};
 export function Header(p: Prop) {
   const router = useRouter();
   const clickMenu = () => {

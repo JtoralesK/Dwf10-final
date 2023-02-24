@@ -14,12 +14,14 @@ export async function fetchAPI(input: RequestInfo, options: any) {
     object.body = JSON.stringify(object.body);
   }
   const res: any = await fetch(url, object);
+  const response = await res.json();
 
   if (res.status >= 200 && res.status <= 300) {
-    return res.json();
+    return response;
   } else {
     throw {
       message: "hubo un error",
+      response,
       status: res.status,
     };
   }
@@ -32,9 +34,11 @@ export async function obtainToken(email: string, code: string) {
       email,
       code: parseInt(code),
     },
+  }).catch((err) => {
+    return err;
   });
-  if (data.error) {
-    return false;
+  if (data.message) {
+    return data;
   }
   if (data) {
     saveToken(data.token);

@@ -1,35 +1,35 @@
 import { Prop } from "./ItemTypes";
 import styled from "styled-components";
-import { LargueText, BodyTextBold, LargueTextBold, BodyText } from "@/ui/text";
-import { NaranjaButton } from "@/ui/buttons";
+import {
+  LargueText,
+  BodyTextBold,
+  LargueTextBold,
+  BodyText,
+  Subtitle,
+} from "@/ui/text";
+import { ContrastButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
-import { getToken } from "@/lib/localStorage";
 import { me } from "@/hooks/me";
 const DivImg = styled.img`
   width: 100%;
   height: 300px;
   @media (min-width: 768px) {
-    width: 500px;
+    width: 450px;
     height: 100%;
   }
 `;
 const ItemContent = styled.div`
-  min-height: 600px;
   display: flex;
-  background-color: #e6e6e6;
   flex-direction: column;
   margin: auto;
+  width: 380px;
   @media (min-width: 768px) {
     flex-direction: row;
-    width: 80%;
-    margin-top: 100px;
+    margin: 50px auto;
+    width: 1000px;
   }
 `;
-const PriceAndNameDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
+
 const ItemContentDescription = styled.div`
   padding: 0 30px;
   display: flex;
@@ -37,8 +37,17 @@ const ItemContentDescription = styled.div`
   gap: 10px;
   margin: 20px 0;
 `;
+const SectionItem = styled.section`
+  background-color: var(--second-color);
+  padding: 10px;
+  min-height: 80vh;
+`;
+const TopButton = styled.div`
+  margin-top: 15px;
+  width: 40%;
+`;
 export function Item(prop: Prop) {
-  const { resp, error, isLoading } = me();
+  const { resp } = me();
   let logged: boolean = false;
   if (resp) logged = !resp.error ?? true;
   console.log(logged);
@@ -51,23 +60,24 @@ export function Item(prop: Prop) {
       router.push("/checkout/" + item.objectID);
     }
   };
+
   return (
     <>
-      <div style={{ padding: "10px" }}>
+      <SectionItem>
         <ItemContent>
-          <DivImg src={item.image} alt="gorra de programación"></DivImg>
+          <DivImg src={item.image} alt={item.name}></DivImg>
           <ItemContentDescription>
-            <PriceAndNameDiv>
-              <LargueText>{item.name}</LargueText>
-              <LargueText>${item.price}</LargueText>
-            </PriceAndNameDiv>
+            <Subtitle>{item.name}</Subtitle>
+            <LargueText>${item.price}</LargueText>
             <BodyTextBold>5 estrellas</BodyTextBold>
             <LargueTextBold>Descripcion:</LargueTextBold>
             <BodyText>{item.description}</BodyText>
-            <NaranjaButton onClick={buy}>Comprar</NaranjaButton>
+            <TopButton>
+              <ContrastButton onClick={buy}>Comprar</ContrastButton>
+            </TopButton>
           </ItemContentDescription>
         </ItemContent>
-      </div>
+      </SectionItem>
     </>
   );
 }

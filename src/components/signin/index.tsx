@@ -17,11 +17,14 @@ const SectionSigning = styled.section`
 export function SigninContent() {
   const [sectionState, setSectionState] = useState(true);
   const [email, setEmail] = useState("");
+  const [errorState, serStateError] = useState(false);
   const router = useRouter();
   const getToken = (code: any) => {
-    obtainToken(email, code).then((e) => {
-      mutate("/me");
-      router.push("/profile");
+    obtainToken(email, code).then((e: any) => {
+      if (e.id) {
+        mutate("/me");
+        router.push("/profile");
+      } else serStateError(true);
     });
   };
   const submitEmail = (e: any) => {
@@ -32,6 +35,7 @@ export function SigninContent() {
     changeSection();
   };
   const changeSection = () => {
+    serStateError(false);
     setSectionState(!sectionState);
   };
   return (
@@ -44,6 +48,7 @@ export function SigninContent() {
           state={sectionState}
         />
         <SectionCode
+          incorrectCode={errorState}
           onSubmit={(code) => {
             getToken(code);
           }}

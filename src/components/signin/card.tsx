@@ -4,16 +4,14 @@ import { Subtitle } from "@/ui/text";
 
 const Content = styled.div`
   height: 300px;
-  background-color: palegoldenrod;
+  background-color: var(--second-color);
   margin-top: 80px;
   width: 300px;
   @media (min-width: 768px) {
     width: 500px;
   }
 `;
-const ContentButton = styled(FucsiaButton)`
-  display: block;
-`;
+
 const ContentCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,9 +21,7 @@ const ContentCard = styled.div`
 `;
 
 const DivButton = styled.div`
-  display: "flex";
-  justify-content: "flex-end";
-  width: "100%";
+  margin-top: 20px;
 `;
 export function Card({ children }: any) {
   return (
@@ -35,9 +31,7 @@ export function Card({ children }: any) {
           <Subtitle>Ingresa</Subtitle>
           {children}
           <DivButton>
-            <div style={{ textAlign: "right" }}>
-              <ContentButton>Continuar</ContentButton>
-            </div>
+            <FucsiaButton>Continuar</FucsiaButton>
           </DivButton>
         </ContentCard>
       </Content>

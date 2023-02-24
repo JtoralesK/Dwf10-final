@@ -50,4 +50,3 @@ export function SectionDirection() {
     </SectionDirrection>
   );
 }
-//          <FucsiaButton onClick={buy}>Aceptar compra</FucsiaButton>

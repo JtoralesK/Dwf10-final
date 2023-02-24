@@ -3,7 +3,16 @@ import { Input } from "@/ui/input";
 import { InvisibleButton } from "@/ui/buttons";
 import { Card } from "./card";
 import { BodyTextBold } from "@/ui/text";
-
+import { useForm } from "react-hook-form";
+import { stateStyle } from "@/external-functions";
+const BodyTextBoldRed = styled(BodyTextBold)`
+  color: red;
+  text-align: center;
+`;
+const ButtonYellow = styled(InvisibleButton)`
+  background-color: var(--fourth-color);
+  display: block;
+`;
 const InputContent = styled.div`
   height: 30px;
   width: 100%;
@@ -13,31 +22,34 @@ type Prop = {
   backSectionEmail?: () => any;
   state: boolean;
   email: string;
+  incorrectCode: boolean;
 };
 export function SectionCode(p: Prop) {
+  const { register, handleSubmit } = useForm();
+
   const corregirEmail = () => {
     if (p.backSectionEmail) p.backSectionEmail();
   };
-  const sendCode = (e: any) => {
-    e.preventDefault();
-    const { codigo } = e.target;
-    if (p.onSubmit) p.onSubmit(codigo.value);
+  const onSubmit = (data: any) => {
+    const { codigo } = data;
+    if (p.onSubmit) p.onSubmit(codigo);
   };
-  const stateCode = !p.state ? { display: "initial" } : { display: "none" };
+
+  const stateCode = stateStyle(!p.state);
+  const stateError = stateStyle(p.incorrectCode);
+
   return (
-    <form
-      style={stateCode}
-      onSubmit={(e) => {
-        sendCode(e);
-      }}
-    >
+    <form style={stateCode} onSubmit={handleSubmit(onSubmit)}>
       <Card>
         <BodyTextBold>Te enviamos tu código a {p.email}</BodyTextBold>
         <InputContent>
-          <Input name="codigo" placeholder="Código"></Input>
-          <InvisibleButton type={"button"} onClick={corregirEmail}>
+          <Input placeholder="Código" {...register("codigo")}></Input>
+          <ButtonYellow type={"button"} onClick={corregirEmail}>
             corregir email
-          </InvisibleButton>
+          </ButtonYellow>
+          <BodyTextBoldRed style={stateError}>
+            Tu código es incorrecto
+          </BodyTextBoldRed>
         </InputContent>
       </Card>
     </form>
