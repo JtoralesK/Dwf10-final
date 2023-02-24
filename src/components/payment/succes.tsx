@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { LargueText } from "@/ui/text";
-import { BlueButton } from "@/ui/buttons";
+import { ContrastButton } from "@/ui/buttons";
 import { useRouter } from "next/router";
 const DivSucces = styled.div`
   width: 330px;
@@ -24,7 +24,7 @@ export function Success() {
     <DivSucces>
       <LargueText>Pago realizado con exito</LargueText>
       <DivButton>
-        <BlueButton onClick={home}>Home</BlueButton>
+        <ContrastButton onClick={home}>Home</ContrastButton>
       </DivButton>
     </DivSucces>
   );
