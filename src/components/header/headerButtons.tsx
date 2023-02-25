@@ -46,3 +46,19 @@ export const SingninButton = () => {
     </ResponsiveDivDisplayInitial>
   );
 };
+export const CheckMyPerfilButton = () => {
+  const { resp: data, isLoading } = me();
+  const router = useRouter();
+  const check = () => {
+    if (data.error) {
+      router.push("/signin");
+    } else router.push("/profile");
+  };
+  return (
+    <ResponsiveDivDisplayInitial>
+      <InvisibleButton onClick={check}>
+        <WhiteLargueTextBold>Mi cuenta</WhiteLargueTextBold>
+      </InvisibleButton>
+    </ResponsiveDivDisplayInitial>
+  );
+};

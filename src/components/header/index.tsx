@@ -7,7 +7,8 @@ import { Prop } from "./headerProps";
 import { useRouter } from "next/router";
 import { WhiteLogo } from "@/ui/icons";
 import { LargueTextBold } from "@/ui/text";
-import { SingninButton } from "./signinButton";
+import { SingninButton, CheckMyPerfilButton } from "./headerButtons";
+
 const WhiteLargueTextBold = styled(LargueTextBold)`
   color: white;
 `;
@@ -52,6 +53,7 @@ export function Header(p: Prop) {
         </InvisibleButton>
       </ResponsiveDivDisplayNone>
       <SingninButton />
+      <CheckMyPerfilButton />
       <AiOutlineShoppingCart style={style} />
     </HeaderBox>
   );

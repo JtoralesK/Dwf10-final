@@ -29,9 +29,9 @@ export function WindowButton(p: ButtonProp) {
   const { resp } = me();
   const onClick = () => {
     if (p.page == "/profile") {
-      if (resp) {
-        router.push("/profile");
-      } else router.push("/signin");
+      if (resp.error) {
+        router.push("/signin");
+      } else router.push("/profile");
     }
     if (p.page == "/signin") {
       router.push("/signin");
