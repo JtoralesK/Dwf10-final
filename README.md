@@ -1,4 +1,4 @@
-Este proyecto es el frontend del e-commerce realizado en modulo 9 de la carrera de Apc school. Se utilizo Next.js y una arquitectura basada en capas.
+Este proyecto es el frontend del e-commerce realizado en modulo 9 de la carrera de Apx school. Se utilizo Next.js y una arquitectura basada en capas.
 
 Deploy:https://dwf10-final.vercel.app/
 Backend: https://github.com/JtoralesK/Dwf9-DFinal
