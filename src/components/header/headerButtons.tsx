@@ -50,6 +50,8 @@ export const CheckMyPerfilButton = () => {
   const { resp: data, isLoading } = me();
   const router = useRouter();
   const check = () => {
+    console.log(data, 2);
+
     if (data.error) {
       router.push("/signin");
     } else router.push("/profile");
