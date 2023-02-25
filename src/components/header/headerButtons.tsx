@@ -15,8 +15,8 @@ export const SingninButton = () => {
   const { resp: data, isLoading } = me();
   const router = useRouter();
   const clickIniciar = () => {
-    if (data) router.push("/profile");
-    router.push("/signin");
+    if (data.error) router.push("/signin");
+    else router.push("/profile");
   };
   const salir = () => {
     deleteMeLocalStorage();
