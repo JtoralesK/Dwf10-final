@@ -49,7 +49,7 @@ export function ResponsiveWindow(p: Prop) {
           <LinkCerrarSecion>
             <EmailBrown>{resp && resp.email}</EmailBrown>
             <ContrastButton onClick={salir}>
-              <BodyTextBold>Cerrar Seción</BodyTextBold>
+              <BodyTextBold>Cerrar sesión</BodyTextBold>
             </ContrastButton>
           </LinkCerrarSecion>
         )}

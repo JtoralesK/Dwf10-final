@@ -34,7 +34,7 @@ export const SingninButton = () => {
     return (
       <ResponsiveDivDisplayInitial>
         <InvisibleButton onClick={salir}>
-          <WhiteLargueTextBold>Cerrar Secion</WhiteLargueTextBold>
+          <WhiteLargueTextBold>Cerrar sesión</WhiteLargueTextBold>
         </InvisibleButton>
       </ResponsiveDivDisplayInitial>
     );
@@ -47,7 +47,7 @@ export const SingninButton = () => {
   );
 };
 export const CheckMyPerfilButton = () => {
-  const { resp: data, isLoading } = me();
+  const { resp: data } = me();
   const router = useRouter();
   const check = () => {
     console.log(data, 2);
