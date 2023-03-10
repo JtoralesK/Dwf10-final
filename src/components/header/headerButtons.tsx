@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { InvisibleButton } from "@/ui/buttons";
-import { useRouter } from "next/router";
 import { me } from "@/hooks/me";
 import { LargueTextBold } from "@/ui/text";
-import { mutate } from "swr";
-import { deleteMeLocalStorage } from "@/lib/localStorage";
 import { LoaderCircular } from "@/ui/loaders/loader";
+import { ButtonRedirect } from "../redirectButtons";
 const WhiteLargueTextBold = styled(LargueTextBold)`
   color: white;
 `;
@@ -13,16 +11,7 @@ import { ResponsiveDivDisplayInitial } from "@/ui/divStyled";
 
 export const SingninButton = () => {
   const { resp: data, isLoading } = me();
-  const router = useRouter();
-  const clickIniciar = () => {
-    if (data.error) router.push("/signin");
-    else router.push("/profile");
-  };
-  const salir = () => {
-    deleteMeLocalStorage();
-    mutate("/me", null, false);
-    router.push("/");
-  };
+  const { clickIniciar, clickSalir } = ButtonRedirect();
   if (isLoading)
     return (
       <ResponsiveDivDisplayInitial>
@@ -33,7 +22,7 @@ export const SingninButton = () => {
   if (data.email)
     return (
       <ResponsiveDivDisplayInitial>
-        <InvisibleButton onClick={salir}>
+        <InvisibleButton onClick={clickSalir}>
           <WhiteLargueTextBold>Cerrar sesión</WhiteLargueTextBold>
         </InvisibleButton>
       </ResponsiveDivDisplayInitial>
@@ -47,18 +36,10 @@ export const SingninButton = () => {
   );
 };
 export const CheckMyPerfilButton = () => {
-  const { resp: data } = me();
-  const router = useRouter();
-  const check = () => {
-    console.log(data, 2);
-
-    if (data.error) {
-      router.push("/signin");
-    } else router.push("/profile");
-  };
+  const { clickIniciar } = ButtonRedirect();
   return (
     <ResponsiveDivDisplayInitial>
-      <InvisibleButton onClick={check}>
+      <InvisibleButton onClick={clickIniciar}>
         <WhiteLargueTextBold>Mi cuenta</WhiteLargueTextBold>
       </InvisibleButton>
     </ResponsiveDivDisplayInitial>
